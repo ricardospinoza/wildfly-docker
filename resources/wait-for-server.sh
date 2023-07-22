@@ -19,10 +19,16 @@ done
 
 if is_server_up; then
     echo "Server is up!"
-    sh /app/wildfly/bin/jboss-cli.sh --connect --file=/resources/install-driver.cli 
-    echo "Database driver installed" 
-    sh /app/wildfly/bin/jboss-cli.sh --connect --file=/resources/install-datasource.cli 
-    echo "Datasource installed" 
+    # If first param isnt default
+    if [ "$1" != "default" ]; then
+        DATASOURCE_FILE="/resources/cli/install-datasource.$1.cli"
+        DRIVER_FILE="/resources/cli/install-driver.$1.cli"
+        # Call jboss cli with file of driver var
+        sh /app/wildfly/bin/jboss-cli.sh --connect --file=$DRIVER_FILE
+        echo "Database driver installed" 
+        sh /app/wildfly/bin/jboss-cli.sh --connect --file=$DATASOURCE_FILE
+        echo "Datasource installed" 
+    fi
     exit 0
 else
     echo "Server did not start within the specified time."
