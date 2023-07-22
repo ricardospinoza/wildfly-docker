@@ -4,7 +4,7 @@ That repo is used to run Wildfly server as container on docker. **Not available 
 
 ---
 
-_Default configutarion:_
+_Default configutation:_
 
 - _Wildfly 22.0.1_
 
