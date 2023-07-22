@@ -1,0 +1,6 @@
+# Prod Resources
+# --------------
+resources/install-driver.cli
+resources/install-datasource.cli
+resources/*.jar
+
