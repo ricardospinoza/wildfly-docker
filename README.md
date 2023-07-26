@@ -39,7 +39,7 @@ This command will run in default mode. That mode will not install any driver or 
 
 
 ```
-docker run -p 8080:8080 -p 9990:9990 -p 5432:5432 -v --build-arg="ENV=dev|prod|test" ./deployments:/deployments --name wildfly-container -c 2048 -it -d wildfly-image
+docker run -p 8080:8080 -p 9990:9990 -p 5432:5432 -v ./deployments:/deployments --name wildfly-container -c 2048 -e "ENV=dev|prod|test" -it -d wildfly-image
 ```
 
 A brief explanation about that command:
