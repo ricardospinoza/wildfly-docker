@@ -22,6 +22,15 @@ docker build -t wildfly-image .
 
 Have a file in `/resources/cli/(install-datasource|install-driver).sample.cli` to use as example of implementation.
 
+This command will run in default mode. That mode will not install any driver or set any datasource. Now if you are looking for a solution to use these items, you can go for two options:
+
+- You can access Wildfly admin console and set manualy all as you want.
+- You can run the command below and that will use `/resources/cli/*.enviroment.*` as you set your ENV.
+
+```
+docker build --build-arg="ENV=dev|prod|test" -t wildfly-image .
+```
+
 **Be Aware:** If you are setting some kind of driver, probably you are going to use a jar and that shoud be present in `/resources/jars/`.
 
 # Run Container
@@ -30,16 +39,6 @@ To run the created image as container is recommended to use the command below:
 
 ```
 docker run -p 8080:8080 -p 9990:9990 -p 5432:5432 -v ./deployments:/deployments --name wildfly-container -c 2048 -it -d wildfly-image
-```
-
-This command will run in default mode. That mode will not install any driver or set any datasource. Now if you are looking for a solution to use these items, you can go for two options:
-
-- You can access Wildfly admin console and set manualy all as you want.
-- You can run the command below and that will use `/resources/cli/*.enviroment.*` as you set your ENV.
-
-
-```
-docker run -p 8080:8080 -p 9990:9990 -p 5432:5432 -v --build-arg="ENV=dev|prod|test" ./deployments:/deployments --name wildfly-container -c 2048 -it -d wildfly-image
 ```
 
 A brief explanation about that command:

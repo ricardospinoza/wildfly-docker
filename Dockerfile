@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
 ARG ENV=default
+ENV ENV=${ENV}
 
 USER root
 
@@ -47,5 +48,5 @@ RUN /app/wildfly/bin/add-user.sh --silent=true admin nimda
 EXPOSE 8080 9990 5432
 
 # Set the default command to run on boot
-CMD /app/wildfly/bin/standalone.sh -b=0.0.0.0 -bmanagement=0.0.0.0 & sh /resources/check-deploy-files.sh & sleep 10s && sh /resources/wait-for-server.sh ${ENV} && tail -f /app/wildfly/standalone/log/server.log
+CMD /app/wildfly/bin/standalone.sh -b=0.0.0.0 -bmanagement=0.0.0.0 & sh /resources/check-deploy-files.sh & sleep 10s && sh /resources/wait-for-server.sh $ENV && tail -f /app/wildfly/standalone/log/server.log
 
