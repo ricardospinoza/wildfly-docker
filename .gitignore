@@ -5,3 +5,5 @@ resources/cli/*.prod.*
 resources/cli/*.test.*
 resources/jars/*
 
+# OS generated files
+.DS_Store
